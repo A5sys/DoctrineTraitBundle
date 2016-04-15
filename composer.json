@@ -1,0 +1,13 @@
+{
+    "name": "a5sys/doctrine-trait-bundle",
+    "type": "symfony-bundle",
+    "autoload": {
+        "psr-4": { "A5sys\\DoctrineTraitBundle\\": "" }
+    },
+    "license": "MIT",
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/framework-bundle": ">=2.3",
+        "doctrine/orm": ">=2.2.3"
+    }
+}
