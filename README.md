@@ -46,7 +46,7 @@ This command will generate all traits in the /src/AppBundle/Entity/Traits direct
 * Go in your entity
 * Paste the method
 * Update the method
-* The trait will not re-generate this method because it is already defined in entity
+* The command will not re-generate this method because it is already defined in entity
 
 ## Exemple
 
