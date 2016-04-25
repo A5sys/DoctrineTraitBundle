@@ -83,7 +83,10 @@ class EntityGenerator extends DoctrineEntityGenerator
     protected function generateEntityNamespace(ClassMetadataInfo $metadata)
     {
         if ($this->hasNamespace($metadata)) {
-            return 'namespace '.str_replace('\\Entity\\', '\\Entity\\'.static::$pathPrefix.'\\', $this->getNamespace($metadata)).';';
+            $namespace = 'namespace '.str_replace('\\Entity\\', '\\Entity\\'.static::$pathPrefix.'\\', $this->getNamespace($metadata)).';';
+            $namespace = str_replace('\\Entity;', '\\Entity\\'.static::$pathPrefix.';', $namespace);
+
+            return $namespace;
         }
     }
 
