@@ -96,6 +96,8 @@ EOT
      */
     protected function getEntityGenerator()
     {
+        $validator = $this->getContainer()->get('validator');
+
         $entityGenerator = new EntityGenerator();
         $entityGenerator->setGenerateAnnotations(false);
         $entityGenerator->setGenerateStubMethods(true);
@@ -105,6 +107,7 @@ EOT
         $entityGenerator->setAnnotationPrefix('ORM\\');
         $entityGenerator->setBackupExisting(false);
         $entityGenerator->setFieldVisibility('protected');
+        $entityGenerator->setValidatorService($validator);
 
         return $entityGenerator;
     }

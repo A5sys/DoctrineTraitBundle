@@ -10,6 +10,7 @@ use Doctrine\ORM\Tools\EntityGenerator as DoctrineEntityGenerator;
  */
 class EntityGenerator extends DoctrineEntityGenerator
 {
+    protected $validatorService;
     protected static $pathPrefix = 'Traits';
 
     /**
@@ -76,6 +77,15 @@ class EntityGenerator extends DoctrineEntityGenerator
     }
 
     /**
+     *
+     * @param type $validatorService
+     */
+    public function setValidatorService($validatorService)
+    {
+        $this->validatorService = $validatorService;
+    }
+
+    /**
      * @param ClassMetadataInfo $metadata
      *
      * @return string
@@ -131,5 +141,34 @@ class EntityGenerator extends DoctrineEntityGenerator
             isset($this->staticReflection[$metadata->name]) &&
             in_array($method, $this->staticReflection[$metadata->name]['methods'])
         );
+    }
+
+    /**
+     * @param array $associationMapping
+     *
+     * @return bool
+     */
+    protected function isAssociationIsNullable($associationMapping)
+    {
+        $isAssociationIsNullable = parent::isAssociationIsNullable($associationMapping);
+
+        //add the null default value for the setter when an assert NotNull is on the column
+        if ($isAssociationIsNullable === false) {
+            $entity = $associationMapping['sourceEntity'];
+            $fieldName = $associationMapping['fieldName'];
+            $entityMetadatas = $this->validatorService->getMetadataFor($entity);
+            if (isset($entityMetadatas->members[$fieldName])) {
+                $fieldMetadatas = $entityMetadatas->members[$fieldName];
+                foreach ($fieldMetadatas as $fieldMetadata) {
+                    foreach ($fieldMetadata->constraints as $constraint) {
+                        if (get_class($constraint) == 'Symfony\\Component\\Validator\\Constraints\\NotNull') {
+                            $isAssociationIsNullable = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $isAssociationIsNullable;
     }
 }
