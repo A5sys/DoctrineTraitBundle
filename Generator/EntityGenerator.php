@@ -123,7 +123,9 @@ class EntityGenerator extends DoctrineEntityGenerator
             $reflClass = new \ReflectionClass($this->getClassToExtend() ?: $metadata->name);
 
             //check that the generated trait is not the one having the method.
-            $generatedTraitPath = str_replace('\\Entity\\', '\\Entity\\'.static::$pathPrefix.'\\', $this->getNamespace($metadata)).'\\'.$this->getClassName($metadata).'Trait';
+            $namespace = str_replace('\\Entity\\', '\\Entity\\'.static::$pathPrefix.'\\', $this->getNamespace($metadata));
+            $namespaceReplaced = preg_replace("/\\\\Entity$/", '\\Entity\\'.static::$pathPrefix, $namespace);
+            $generatedTraitPath = $namespaceReplaced.'\\'.$this->getClassName($metadata).'Trait';
 
             if (trait_exists($generatedTraitPath)) {
                 $traitRc = new \ReflectionClass($generatedTraitPath);
