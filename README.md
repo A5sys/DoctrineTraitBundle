@@ -35,7 +35,7 @@ In the AppKernel, activate the bundle for the dev environment
 
 Run the command
 
-        php app/console doctrine:generate:trait @AppBundle
+        php app/console generate:doctrine:traits @AppBundle
 
 This command will generate all traits in the /src/AppBundle/Entity/Traits directory
 
