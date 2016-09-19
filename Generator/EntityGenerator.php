@@ -28,6 +28,32 @@ class EntityGenerator extends DoctrineEntityGenerator
 ';
 
     /**
+     * @var string
+     */
+    protected static $constructorMethodTemplate =
+'/**
+ * Constructor
+ */
+public function __construct()
+{
+    $this->doctrineConstruct();
+}
+';
+
+    /**
+     * @var string
+     */
+    protected static $doctrineConstructorMethodTemplate =
+'/**
+ * Doctrine Constructor
+ */
+public function doctrineConstruct()
+{
+<spaces><collections>
+}
+';
+
+    /**
      *
      */
     public function __construct()
@@ -172,5 +198,34 @@ class EntityGenerator extends DoctrineEntityGenerator
         }
 
         return $isAssociationIsNullable;
+    }
+
+    /**
+     * @param ClassMetadataInfo $metadata
+     *
+     * @return string
+     */
+    protected function generateEntityConstructor(ClassMetadataInfo $metadata)
+    {
+        $content = '';
+
+        $collections = array();
+
+        foreach ($metadata->associationMappings as $mapping) {
+            if ($mapping['type'] & ClassMetadataInfo::TO_MANY) {
+                $collections[] = '$this->'.$mapping['fieldName'].' = new \Doctrine\Common\Collections\ArrayCollection();';
+            }
+        }
+
+        if ($collections) {
+            $content = $this->prefixCodeWithSpaces(str_replace("<collections>", implode("\n".$this->spaces, $collections), self::$doctrineConstructorMethodTemplate));
+        }
+
+        if (!$this->hasMethod('__construct', $metadata)) {
+            $content .= "\n";
+            $content .= $this->prefixCodeWithSpaces(self::$constructorMethodTemplate);
+        }
+
+        return $content;
     }
 }
