@@ -219,11 +219,11 @@ public function doctrineConstruct()
 
         if ($collections) {
             $content = $this->prefixCodeWithSpaces(str_replace("<collections>", implode("\n".$this->spaces, $collections), self::$doctrineConstructorMethodTemplate));
-        }
 
-        if (!$this->hasMethod('__construct', $metadata)) {
-            $content .= "\n";
-            $content .= $this->prefixCodeWithSpaces(self::$constructorMethodTemplate);
+            if (!$this->hasMethod('__construct', $metadata)) {
+                $content .= "\n";
+                $content .= $this->prefixCodeWithSpaces(self::$constructorMethodTemplate);
+            }
         }
 
         return $content;
