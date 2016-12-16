@@ -37,7 +37,11 @@ Run the command
 
         php app/console generate:doctrine:traits @AppBundle
 
-This command will generate all traits in the /src/AppBundle/Entity/Traits directory
+Or this one if you want to act on a single entity
+
+        php app/console generate:doctrine:traits "AppBundle:MyEntity"
+
+Those commands will generate the trait(s) in the /src/AppBundle/Entity/Traits directory
 
 ## Use custom method
 
