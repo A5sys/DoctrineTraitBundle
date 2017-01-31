@@ -228,4 +228,26 @@ public function doctrineConstruct()
 
         return $content;
     }
+
+    /**
+     * @param ClassMetadataInfo $metadata
+     *
+     * @return string
+     */
+    protected function generateEntityFieldMappingProperties(ClassMetadataInfo $metadata)
+    {
+        //only the stub methods are requested
+        return '';
+    }
+
+    /**
+     * @param ClassMetadataInfo $metadata
+     *
+     * @return string
+     */
+    protected function generateEntityAssociationMappingProperties(ClassMetadataInfo $metadata)
+    {
+        //only the stub methods are requested
+        return '';
+    }
 }
