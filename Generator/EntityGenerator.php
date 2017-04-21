@@ -24,8 +24,7 @@ class EntityGenerator extends DoctrineEntityGenerator
 <entityClassName>
 {
 <entityBody>
-}
-';
+}';
 
     /**
      * @var string
@@ -92,11 +91,10 @@ public function doctrineConstruct()
             mkdir($dir, 0775, true);
         }
 
-        //remove the trailing spaces and tabs
-        $pattern = '/[ ]*\n/';
+        $content = $this->generateEntityClass($metadata);
+        $content = $this->removeTrailingSpacesAndTab($content);
+        $cleanedContent = $this->removeUnusefulBlankLineBetweenEndBraces($content);
 
-        $replacement = "\n";
-        $cleanedContent = preg_replace($pattern, $replacement, $this->generateEntityClass($metadata));
         file_put_contents($traitPath, $cleanedContent);
 
         chmod($traitPath, 0664);
@@ -249,5 +247,31 @@ public function doctrineConstruct()
     {
         //only the stub methods are requested
         return '';
+    }
+
+    /**
+     * @param string $content
+     * @return string
+     */
+    protected function removeTrailingSpacesAndTab($content)
+    {
+        $pattern = '/[ ]*\n/';
+        $replacement = "\n";
+        $cleanedContent = preg_replace($pattern, $replacement, $content);
+
+        return $cleanedContent;
+    }
+
+    /**
+     * @param string $content
+     * @return string
+     */
+    protected function removeUnusefulBlankLineBetweenEndBraces($content)
+    {
+        $pattern = '/}\n\n}/';
+        $replacement = "}\n}";
+        $cleanedContent = preg_replace($pattern, $replacement, $content);
+
+        return $cleanedContent;
     }
 }
