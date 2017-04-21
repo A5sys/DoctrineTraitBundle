@@ -24,8 +24,7 @@ class EntityGenerator extends DoctrineEntityGenerator
 <entityClassName>
 {
 <entityBody>
-}
-';
+}';
 
     /**
      * @var string
