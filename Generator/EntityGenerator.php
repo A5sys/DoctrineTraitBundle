@@ -36,8 +36,7 @@ class EntityGenerator extends DoctrineEntityGenerator
 public function __construct()
 {
     $this->doctrineConstruct();
-}
-';
+}';
 
     /**
      * @var string
@@ -49,8 +48,7 @@ public function __construct()
 public function doctrineConstruct()
 {
 <spaces><collections>
-}
-';
+}';
 
     /**
      *
