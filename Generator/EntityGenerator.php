@@ -12,6 +12,7 @@ class EntityGenerator extends DoctrineEntityGenerator
 {
     protected $validatorService;
     protected static $pathPrefix = 'Traits';
+    const DIRECTORY_SEPARATOR = '/';
 
     /**
      * @var string
@@ -82,7 +83,7 @@ public function doctrineConstruct()
             $this->staticReflection[$metadata->name] = array('properties' => array(), 'methods' => array());
         }
 
-        $traitPath = $outputDirectory.'/'.str_replace('\\', DIRECTORY_SEPARATOR, $metadata->name).'Trait'.$this->extension;
+        $traitPath = $outputDirectory.'/'.str_replace('\\', static::DIRECTORY_SEPARATOR, $metadata->name).'Trait'.$this->extension;
         $traitPath = str_replace('/Entity/', '/Entity/'.static::$pathPrefix.'/', $traitPath);
 
         $dir = dirname($traitPath);
