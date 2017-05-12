@@ -18,7 +18,7 @@ All basics getters/setters are in the trait.
 
 Use composer to get the bundle
 
-    composer require "a5sys/doctrine-trait-bundle"
+    composer require --dev "a5sys/doctrine-trait-bundle"
 
 # Activate the bundle
 
@@ -35,7 +35,7 @@ In the AppKernel, activate the bundle for the dev environment
 
 Run the command
 
-        php app/console generate:doctrine:traits @AppBundle
+        php app/console generate:doctrine:traits AppBundle\\Entity
 
 Or this one if you want to act on a single entity
 
