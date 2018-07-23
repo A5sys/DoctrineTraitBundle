@@ -175,7 +175,7 @@ public function doctrineConstruct()
      *
      * @return bool
      */
-    protected function isAssociationIsNullable($associationMapping)
+    protected function isAssociationIsNullable(array $associationMapping)
     {
         $isAssociationIsNullable = parent::isAssociationIsNullable($associationMapping);
 
