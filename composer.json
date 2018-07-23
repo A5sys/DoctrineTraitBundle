@@ -6,8 +6,8 @@
     },
     "license": "MIT",
     "require": {
-        "php": ">=5.4.0",
+        "php": "^7.1",
         "symfony/framework-bundle": ">=2.3",
-        "doctrine/orm": ">=2.2.3"
+        "doctrine/orm": "^2.6"
     }
 }
