@@ -1,0 +1,15 @@
+    /**
+     * @return $this
+     */
+    public function remove{{ fieldNameSingular|ucfirst }}({{ targetEntity }} ${{ fieldNameSingular }}): self
+    {
+        if ($this->{{ fieldname }}->contains(${{ fieldNameSingular }})) {
+            $this->{{ fieldname }}->removeElement(${{ fieldNameSingular }});
+            // set the owning side to null (unless already changed)
+            if (${{ fieldNameSingular }}->get{{ mappedBy|ucfirst }}() === $this) {
+                ${{ fieldNameSingular }}->set{{ mappedBy|ucfirst }}(null);
+            }
+        }
+
+        return $this;
+    }

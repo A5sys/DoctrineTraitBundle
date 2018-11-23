@@ -1,0 +1,7 @@
+    public function __construct()
+    {
+        $this->doctrineConstruct();
+{%  if hasParent %}
+        parent::__construct();
+{% endif %}
+    }

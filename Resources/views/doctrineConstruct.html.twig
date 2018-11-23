@@ -1,0 +1,9 @@
+    public function doctrineConstruct()
+    {
+{% for collection in collections %}
+        $this->{{ collection }} = new \Doctrine\Common\Collections\ArrayCollection();
+{% endfor %}
+{%  if hasParent %}
+        parent::doctrineConstruct();
+{% endif %}
+    }

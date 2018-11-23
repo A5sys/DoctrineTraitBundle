@@ -1,0 +1,12 @@
+    /**
+     * @return $this
+     */
+    public function add{{ fieldNameSingular|ucfirst }}({{ targetEntity }} ${{ fieldNameSingular }}): self
+    {
+        if (!$this->{{ fieldname }}->contains(${{ fieldNameSingular }})) {
+            $this->{{ fieldname }}[] = ${{ fieldNameSingular }};
+            ${{ fieldNameSingular }}->add{{ mappedBySingular|ucfirst }}($this);
+        }
+
+        return $this;
+    }

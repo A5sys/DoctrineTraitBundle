@@ -1,0 +1,9 @@
+    /**
+     * @return $this
+     */
+    public function set{{ fieldname|ucfirst }}({{ nullableLabel }}{{ targetEntity }} ${{ fieldname }}): self
+    {
+        $this->{{ fieldname }} = ${{ fieldname }};
+
+        return $this;
+    }

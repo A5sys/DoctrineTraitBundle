@@ -1,0 +1,17 @@
+services:
+    doctrine_trait.doctrine_trait_extension:
+        class: A5sys\DoctrineTraitBundle\Twig\DoctrineTraitExtension
+        tags:
+        - { name: twig.extension }
+    doctrine_trait.entity_generator:
+        class: A5sys\DoctrineTraitBundle\Generator\EntityGenerator
+        arguments:
+        - "@maker.doctrine_helper"
+        - "@kernel"
+        - "@validator"
+    doctrine_trait.entities_command:
+        class: A5sys\DoctrineTraitBundle\Command\EntitiesCommand
+        arguments:
+            - "@doctrine_trait.entity_generator"
+        tags:
+            - { name: console.command }

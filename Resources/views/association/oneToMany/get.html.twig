@@ -1,0 +1,7 @@
+    /**
+     * @return \Doctrine\Common\Collections\Collection|{{ targetEntity }}[]
+    */
+    public function get{{ fieldname | ucfirst }}(): \Doctrine\Common\Collections\Collection
+    {
+        return $this->{{ fieldname }};
+    }
