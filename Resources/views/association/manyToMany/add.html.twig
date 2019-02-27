@@ -5,7 +5,9 @@
     {
         if (!$this->{{ fieldname }}->contains(${{ fieldNameSingular }})) {
             $this->{{ fieldname }}[] = ${{ fieldNameSingular }};
+{%  if fieldNameSingular %}
             ${{ fieldNameSingular }}->add{{ mappedBySingular|ucfirst }}($this);
+{% endif %}
         }
 
         return $this;
